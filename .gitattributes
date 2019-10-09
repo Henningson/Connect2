@@ -1,0 +1,11 @@
+*.vcxproj linguist-detectable=false
+*.sln linguist-detectable=false
+*.filters linguist-detectable=false
+*.dll linguist-detectable=false
+*.cmake linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+Game/include/Box2D/* linguist-detectable=false
+Game/include/SFML/* linguist-detectable=false
+Game/lib/* linguist-detectable=false
+*.ttf linguist-detectable=false

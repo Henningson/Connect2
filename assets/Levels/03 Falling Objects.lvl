@@ -1,0 +1,55 @@
+#Level 2
+
+SL 3000.0
+P1 0.166666 0.75 0.025
+P2 0.833333 0.75 0.025
+
+BOX
+pos 0.5 1.1
+size 1.0 0.333
+static
+EO
+
+CIR
+pos 0.5 0.5
+rad 0.025
+dynamic
+EO
+
+CIR
+pos 0.25 0.5
+rad 0.025
+dynamic
+EO
+
+CIR
+pos 0.75 0.5
+rad 0.025
+dynamic
+EO
+
+CIR
+pos 0.66 0.25
+rad 0.025
+dynamic
+EO
+
+CIR
+pos 0.33 0.25
+rad 0.025
+dynamic
+EO
+
+BOX
+pos 0.5 0.0
+size 0.1 0.1
+dynamic
+EO
+
+#TRIANGLE
+POL
+vec 0.5 0.3
+vec 0.475 0.4
+vec 0.525 0.4
+dynamic
+EO

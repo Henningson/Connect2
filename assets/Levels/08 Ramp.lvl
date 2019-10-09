@@ -1,0 +1,17 @@
+#05 Race
+
+SL 900.0
+P1 0.2 0.1 0.025
+P2 0.8 0.1 0.025
+
+BOX
+pos 0.15 0.25
+size 0.025 0.05
+static
+EO
+
+CIR
+pos 0.82 0.3
+rad 0.025
+static
+EO

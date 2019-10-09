@@ -1,0 +1,17 @@
+#SUN
+
+SL 5000.0
+P1 0.25 0.25 0.025
+P2 0.75 0.25 0.025
+
+BOX
+pos 0.0 1.0
+size 2.0 0.1
+static
+EO
+
+CIR
+pos 0.5 0.45
+rad 0.2
+dynamic
+EO

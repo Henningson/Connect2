@@ -1,0 +1,26 @@
+#Level 1
+
+SL 3000.0
+P1 0.166666 0.8555 0.025
+P2 0.833333 0.8555 0.025
+
+BOX
+pos 0.15 1.0
+size 0.5 0.1
+static
+EO
+
+BOX
+pos 0.85 1.0
+size 0.5 0.1
+static
+EO
+
+#POL 
+#vec 0.1 0.1
+#vec 0.1 0.2
+#vec 0.15 0.3
+#vec 0.2 0.2
+#vec 0.2 0.1
+#dynamic
+#EO
