@@ -1,10 +1,7 @@
 .vs/
-/Debug/
-Game/Debug/
-Game/Release/
-Game/lib/
-Game/include/Box2D/
-Game/include/SFML/
+SFML*/
+Box2D/
+build/
 
 Game/resource.h
 *.aps
@@ -17,3 +14,4 @@ Game/resource.h
 *.dll
 *.ico
 *.sln
+CMakeCache.txt

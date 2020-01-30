@@ -11,9 +11,9 @@ PlayingState::PlayingState(sf::RenderWindow * window, bool drawGui, Level* level
 	this->im = new PlayingInputManager(this, 30.f);
 
 	this->cl = new ContactListener();
-	this->debugDraw = new SFMLDebugDraw(*this->window);
+	this->debugDraw = NULL; //new SFMLDebugDraw(*this->window);
 	this->gameWorld->getPhysWorld()->SetDebugDraw(this->debugDraw);
-	this->debugDraw->SetFlags(b2Draw::e_shapeBit);
+	//this->debugDraw->SetFlags(b2Draw::e_shapeBit);
 	this->gameWorld->getPhysWorld()->SetContactListener(this->cl);
 	this->generateLevel();
 

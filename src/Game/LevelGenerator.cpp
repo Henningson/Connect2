@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "PlayingState.h"
-
+/*
 Game::Game(unsigned int xSize, unsigned int ySize, std::string title, bool fullscreen) {
 	this->title = title;
 	sf::ContextSettings settings;
@@ -50,3 +50,4 @@ void Game::checkState() {
 		}
 	}
 }
+*/

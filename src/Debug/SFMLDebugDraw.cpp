@@ -49,7 +49,7 @@ void SFMLDebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, 
 	m_window->draw(polygon);
 }
 
-void SFMLDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
+void SFMLDebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& color) {
 	sf::CircleShape circle(radius * sfdd::SCALE);
 	circle.setOrigin(radius * sfdd::SCALE, radius * sfdd::SCALE);
 	circle.setPosition(SFMLDebugDraw::B2VecToSFVec(center));
@@ -60,7 +60,7 @@ void SFMLDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Col
 	m_window->draw(circle);
 }
 
-void SFMLDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color) {
+void SFMLDebugDraw::DrawSolidCircle(const b2Vec2& center, float radius, const b2Vec2& axis, const b2Color& color) {
 	sf::CircleShape circle(radius * sfdd::SCALE);
 	circle.setOrigin(radius * sfdd::SCALE, radius * sfdd::SCALE);
 	circle.setPosition(SFMLDebugDraw::B2VecToSFVec(center));
