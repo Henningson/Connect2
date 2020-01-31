@@ -74,7 +74,7 @@ void SplineEntity::genRect() {
 	b2PolygonShape* shape = new b2PolygonShape();
 	shape->m_count = 4;
 	shape->Set(vert, 4);
-	this->addFixture(5.0f, 0.1f, 0.1f, shape);
+	this->addFixture(15.0f, 0.1f, 0.1f, shape);
 }
 
 std::vector<sf::Shape*> SplineEntity::getShapes() {
