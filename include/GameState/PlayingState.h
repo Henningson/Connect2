@@ -10,7 +10,6 @@
 class PlayingState : public GameState {
 	public:
 		PlayingState(sf::RenderWindow* window, bool drawGui, Level* level);
-		void toggleDebugMode();
 		GameWorld* getGameWorld();
 		void processEvents() override;
 		void generateLevel();
@@ -30,8 +29,6 @@ class PlayingState : public GameState {
 		sf::Sound sound;
 		sf::SoundBuffer buffer;
 		GameWorld* gameWorld;
-		SFMLDebugDraw* debugDraw;
-		bool debugMode = false;
 		bool drawGui;
 		bool runGame = false;
 		ContactListener* cl;

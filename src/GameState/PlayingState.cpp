@@ -11,9 +11,6 @@ PlayingState::PlayingState(sf::RenderWindow * window, bool drawGui, Level* level
 	this->im = new PlayingInputManager(this, 30.f);
 
 	this->cl = new ContactListener();
-	this->debugDraw = NULL; //new SFMLDebugDraw(*this->window);
-	this->gameWorld->getPhysWorld()->SetDebugDraw(this->debugDraw);
-	//this->debugDraw->SetFlags(b2Draw::e_shapeBit);
 	this->gameWorld->getPhysWorld()->SetContactListener(this->cl);
 	this->generateLevel();
 
@@ -51,10 +48,6 @@ void PlayingState::generateLevel() {
 						sf::Vector2f(window->getSize().x / 2.f, window->getSize().y / 30.f),
 						sf::Vector2f(window->getSize().x / 3.f, window->getSize().y / 30.f),
 						this->level->getMaxSplineLength());
-}
-
-void PlayingState::toggleDebugMode() {
-	this->debugMode = !debugMode;
 }
 
 GameWorld* PlayingState::getGameWorld() {
@@ -134,9 +127,6 @@ void PlayingState::draw(){
 				this->window->draw(*shapes[j]);
 		}
 	}
-
-	if (this->debugMode)
-		this->gameWorld->getPhysWorld()->DrawDebugData();
 	
 	this->progressBar->setLength(this->splineLength);
 	this->window->draw(*this->progressBar->getBackground());

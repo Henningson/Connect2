@@ -21,8 +21,6 @@ void PlayingInputManager::handlePlayerInput(sf::Keyboard::Key key, bool keyPress
 		this->state->kill();
 	} else if (key == sf::Keyboard::Key::Return) {
 		((PlayingState*)this->state)->restart();
-	} else if (key == sf::Keyboard::Key::Tab) {
-		((PlayingState*)this->state)->toggleDebugMode();
 	}
 }
 

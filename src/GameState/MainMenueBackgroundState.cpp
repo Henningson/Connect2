@@ -24,13 +24,13 @@ void MainMenueBackgroundState::generateLevel() {
 	boxOrigin.y += 30.f;
 
 	sf::Texture* tex = new sf::Texture();
-	tex->loadFromFile("assets/Player/Player1sad.jpg");
+	tex->loadFromFile("assets/Object/Player1sad.jpg");
 	this->circle1 = this->gameWorld->addCircle(ConvSfToB2Vec(sf::Vector2f(windowSize.x / 6.f * 1.f, windowSize.y - 100.f), 30.f), 45.f);
 	this->circle1->getBody()->SetUserData(this->circle1);
 	this->circle1->setTexture(tex);
 
 	sf::Texture* tex1 = new sf::Texture();
-	tex1->loadFromFile("assets/Player/Player2sad.jpg");
+	tex1->loadFromFile("assets/Object/Player2sad.jpg");
 	this->circle2 = this->gameWorld->addCircle(ConvSfToB2Vec(sf::Vector2f(windowSize.x / 6.f * 5.f, windowSize.y - 100.f), 30.f), 45.f);
 	this->circle2->getBody()->SetUserData(this->circle2);
 	this->circle2->setTexture(tex1);
@@ -61,11 +61,11 @@ void MainMenueBackgroundState::processEvents() {
 void MainMenueBackgroundState::checkCollision() {
 	if (this->circle1->collision() && this->circle2->collision()) {
 		sf::Texture* tex1 = new sf::Texture();
-		tex1->loadFromFile("assets/Player/Player1.jpg");
+		tex1->loadFromFile("assets/Object/Player1.jpg");
 		this->circle1->setTexture(tex1);
 			
 		sf::Texture* tex2 = new sf::Texture();
-		tex2->loadFromFile("assets/Player/Player2.jpg");
+		tex2->loadFromFile("assets/Object/Player2.jpg");
 		this->circle2->setTexture(tex2);
 		return;
 	}
