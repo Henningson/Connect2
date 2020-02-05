@@ -1,17 +1,12 @@
 #include "PolygonEntity.h"
 
-PolygonEntity::PolygonEntity(std::vector<sf::Vector2f*> vertices, float scale, b2BodyType type) : Entity(b2Vec2(0,0), scale, type) {
+PolygonEntity::PolygonEntity(std::vector<sf::Vector2f*> vertices, float scale, b2BodyType type, bool isLava) : Entity(b2Vec2(0,0), scale, type, isLava) {
 	this->vertices = vertices;
 }
 
 void PolygonEntity::finalizeObject() {
 	this->shape = new sf::ConvexShape(vertices.size());
-
-	if (this->bodyDef.type == b2_dynamicBody) {
-		this->shape->setFillColor(sf::Color(252, 221, 51, 255));
-	} else {
-		this->shape->setFillColor(sf::Color(156, 156, 156, 255));
-	}
+	this->setColor();
 
 	for (unsigned int i = 0; i < vertices.size(); i++)
 		((sf::ConvexShape*)this->shape)->setPoint(i, *vertices[i]);

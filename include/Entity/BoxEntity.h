@@ -4,7 +4,7 @@
 
 class BoxEntity : public ComplexEntity, public Entity {
 	public:
-		BoxEntity(b2Vec2 position, float scale, b2BodyType type, b2Vec2 size);
+		BoxEntity(b2Vec2 position, float scale, b2BodyType type, b2Vec2 size, bool isLava);
 		void finalizeObject() override;
 
 	private:

@@ -1,6 +1,6 @@
 #include "SplineEntity.h"
 
-SplineEntity::SplineEntity(b2Vec2 position, float scale, b2BodyType type, float thickness) : Entity(position, scale, type) {
+SplineEntity::SplineEntity(b2Vec2 position, float scale, b2BodyType type, float thickness) : Entity(position, scale, type, false) {
 	this->thickness = thickness;
 	this->addVertex(position);
 	this->bodyShape = new b2PolygonShape();

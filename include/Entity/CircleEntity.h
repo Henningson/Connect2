@@ -4,11 +4,8 @@
 
 class CircleEntity : public ComplexEntity, public Entity {
 	public:
-		CircleEntity(b2Vec2 pos, float scale, b2BodyType type, float radius);
+		CircleEntity(b2Vec2 pos, float scale, b2BodyType type, float radius, bool isLava);
 		void finalizeObject() override;
-		void startContact() { contacting = true; }
-		void endContact() { contacting = false; }
-		bool collision();
 		float getRadius();
 
 	private:

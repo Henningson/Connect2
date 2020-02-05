@@ -1,7 +1,7 @@
 #include "FixtureEntity.h"
 #pragma once
 
-FixtureEntity::FixtureEntity(b2Vec2 pos, float scale, b2BodyType type) : Entity(pos, scale, type) {
+FixtureEntity::FixtureEntity(b2Vec2 pos, float scale, b2BodyType type, bool isLava) : Entity(pos, scale, type, isLava) {
 	this->pos = pos;
 }
 

@@ -4,7 +4,7 @@
 
 class PolygonEntity : public ComplexEntity, public Entity {
 	public:
-		PolygonEntity(std::vector<sf::Vector2f*> vertices, float scale, b2BodyType type);
+		PolygonEntity(std::vector<sf::Vector2f*> vertices, float scale, b2BodyType type, bool isLava);
 
 	public:
 		void finalizeObject() override;

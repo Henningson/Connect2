@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(Connect2)
 
-include_directories(include/Debug include/Entity include/Game include/GameState include/GUI include/Helper include/Input include/Level)
+include_directories(include/Debug include/Entity include/Game include/GameState include/GUI include/Helper include/Input include/Level include/Animation)
 include_directories(${CMAKE_SOURCE_DIR}/Box2D/include)
 include_directories(${CMAKE_SOURCE_DIR}/SFML-2.5.1/include)
 

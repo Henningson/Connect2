@@ -4,7 +4,7 @@
 
 class FixtureEntity : public Entity, public ComplexEntity {
 	public:
-		FixtureEntity(b2Vec2 pos, float scale, b2BodyType type);
+		FixtureEntity(b2Vec2 pos, float scale, b2BodyType type, bool isLava);
 		std::vector<sf::Shape*> getShapes();
 
 	public:

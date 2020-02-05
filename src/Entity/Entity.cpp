@@ -1,9 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity(b2Vec2 position, float scale, b2BodyType type) {
+Entity::Entity(b2Vec2 position, float scale, b2BodyType type, bool isLava) {
 	this->scale = scale;
 	this->bodyDef.position.Set(position.x, position.y);
 	this->bodyDef.type = type;
+	this->isLava = isLava;
 }
 
 void Entity::setBody(b2Body* body) {
@@ -54,4 +55,20 @@ void Entity::setBodyFix(float density, float friction, float restitution) {
 
 bool Entity::contains(sf::Vector2f pos) {
 	return this->getShape()->getGlobalBounds().contains(pos);
+}
+
+void Entity::setColor() {
+	if (this->bodyDef.type == b2_dynamicBody) {
+		this->shape->setFillColor(sf::Color(252, 221, 51, 255));
+		if (this->isLava)
+			this->shape->setFillColor(sf::Color(252, 100, 100, 255));
+	} else {
+		this->shape->setFillColor(sf::Color(156, 156, 156, 255));
+		if (this->isLava)
+			this->shape->setFillColor(sf::Color(252, 50, 50, 255));
+	}
+}
+
+bool Entity::isEntityLava() {
+	return this->isLava;
 }

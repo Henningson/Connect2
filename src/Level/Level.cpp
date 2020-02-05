@@ -58,13 +58,13 @@ void Level::loadLevel(std::string levelPath) {
 		if (line.substr(0, 2) == "P1") {
 			float x, y, radius;
 			sscanf_s(line.c_str(), "P1 %f %f %f", &x, &y, &radius);
-			this->playerOne = new CircleEntity(ConvSfToB2Vec(sf::Vector2f(this->window->getSize().x * x, this->window->getSize().y * y), 30.f), 30.f, b2_dynamicBody, this->window->getSize().x * radius);
+			this->playerOne = new CircleEntity(ConvSfToB2Vec(sf::Vector2f(this->window->getSize().x * x, this->window->getSize().y * y), 30.f), 30.f, b2_dynamicBody, this->window->getSize().x * radius, false);
 		}
 
 		if (line.substr(0, 2) == "P2") {
 			float x, y, radius;
 			sscanf_s(line.c_str(), "P2 %f %f %f", &x, &y, &radius);
-			this->playerTwo = new CircleEntity(ConvSfToB2Vec(sf::Vector2f(this->window->getSize().x * x, this->window->getSize().y * y), 30.f), 30.f, b2_dynamicBody, this->window->getSize().x * radius);
+			this->playerTwo = new CircleEntity(ConvSfToB2Vec(sf::Vector2f(this->window->getSize().x * x, this->window->getSize().y * y), 30.f), 30.f, b2_dynamicBody, this->window->getSize().x * radius, false);
 		}
 
 		//Parse Box
@@ -72,6 +72,7 @@ void Level::loadLevel(std::string levelPath) {
 			sf::Vector2f pos;
 			sf::Vector2f size;
 			b2BodyType type;
+			bool isLava = false;
 			do {
 				if (line.substr(0, 3) == "pos") {
 					float x, y;
@@ -91,9 +92,12 @@ void Level::loadLevel(std::string levelPath) {
 				if (line.substr(0, 7) == "dynamic")
 					type = b2_dynamicBody;
 
+				if (line.substr(0, 6) == "lava")
+					isLava = true;
+
 				getline(input, line);
 			} while (line.substr(0, 2) != "EO"); //End of Object
-			this->boxEntities.push_back(new BoxEntity(ConvSfToB2Vec(pos, 30.f), 30.f, type, ConvSfToB2Vec(size, 30.f)));
+			this->boxEntities.push_back(new BoxEntity(ConvSfToB2Vec(pos, 30.f), 30.f, type, ConvSfToB2Vec(size, 30.f), isLava));
 		}
 
 		if (line.substr(0, 3) == "NDS") {
@@ -123,6 +127,7 @@ void Level::loadLevel(std::string levelPath) {
 			sf::Vector2f pos;
 			float radius;
 			b2BodyType type;
+			bool isLava = false;
 			do {
 				if (line.substr(0, 3) == "pos") {
 					float x, y;
@@ -136,18 +141,22 @@ void Level::loadLevel(std::string levelPath) {
 				if (line.substr(0, 6) == "static")
 					type = b2_staticBody;
 
+				if (line.substr(0, 6) == "lava")
+					isLava = true;
+
 				if (line.substr(0, 7) == "dynamic")
 					type = b2_dynamicBody;
 
 				getline(input, line);
 			} while (line.substr(0, 2) != "EO"); //End of Object
-			this->circleEntities.push_back(new CircleEntity(ConvSfToB2Vec(pos, 30.f), 30.f, type, radius*this->window->getSize().x));
+			this->circleEntities.push_back(new CircleEntity(ConvSfToB2Vec(pos, 30.f), 30.f, type, radius*this->window->getSize().x, isLava));
 		}
 
 		//Parse Polygon
 		if (line.substr(0, 3) == "POL") {
 			b2BodyType type;
 			std::vector<sf::Vector2f*> vec;
+			bool isLava = false;
 			do {
 				if (line.substr(0, 3) == "vec") {
 					float x, y;
@@ -161,9 +170,12 @@ void Level::loadLevel(std::string levelPath) {
 				if (line.substr(0, 7) == "dynamic")
 					type = b2_dynamicBody;
 
+				if (line.substr(0, 6) == "lava")
+					isLava = true;
+
 				getline(input, line);
 			} while (line.substr(0, 2) != "EO"); //End of Object
-			this->polygonEntities.push_back(new PolygonEntity(vec, 30.f, type));
+			this->polygonEntities.push_back(new PolygonEntity(vec, 30.f, type, isLava));
 		}
 	}
 }

@@ -6,6 +6,7 @@
 #include "ProgressBar.h"
 #include "Level.h"
 #include <SFML\Audio.hpp>
+#include "AnimationManager.h"
 
 class PlayingState : public GameState {
 	public:
@@ -26,16 +27,22 @@ class PlayingState : public GameState {
 		void showWonGUI();
 
 	private:
+		sf::Clock frameClock;
 		sf::Sound sound;
 		sf::SoundBuffer buffer;
 		GameWorld* gameWorld;
 		bool drawGui;
 		bool runGame = false;
+		bool gameWon = false;
 		ContactListener* cl;
 		SplineEntity* spline;
 		CircleEntity* playerOne;
 		CircleEntity* playerTwo;
 		ProgressBar* progressBar;
 		Level* level;
+		//AnimationManager* animationManager;
 		float splineLength;
+		AnimatedSprite* gameWonSprite1;
+		AnimatedSprite* gameWonSprite2;
+		AnimationManager* animationManager;
 };

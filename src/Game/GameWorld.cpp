@@ -157,14 +157,14 @@ int GameWorld::getBodyCount() {
 }
 
 void GameWorld::addBox(b2Vec2 pos, b2Vec2 size) {
-	BoxEntity* e = new BoxEntity(pos, this->scale, b2_staticBody, size);
+	BoxEntity* e = new BoxEntity(pos, this->scale, b2_staticBody, size, false);
 	e->setBody(this->world->CreateBody(&e->getBodyDef()));
 	e->finalizeObject();
 	this->registerEntity(e);
 }
 
 CircleEntity* GameWorld::addCircle(b2Vec2 pos, float radius) {
-	CircleEntity* e = new CircleEntity(pos, this->scale, b2_dynamicBody, radius);
+	CircleEntity* e = new CircleEntity(pos, this->scale, b2_dynamicBody, radius, false);
 	e->setBody(this->world->CreateBody(&e->getBodyDef()));
 	e->finalizeObject();
 	this->registerEntity(e);

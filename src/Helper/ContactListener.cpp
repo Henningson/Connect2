@@ -1,4 +1,5 @@
 #include "ContactListener.h"
+#include "CircleEntity.h"
 
 void ContactListener::BeginContact(b2Contact* contact) {
 	//check if fixture A was a ball

@@ -2,6 +2,12 @@
 #include "PlayingInputManager.h"
 #include "GameLostState.h"
 #include "GameWonState.h"
+#include <iostream>
+
+Animation winningAnimation1;
+sf::Texture tex1;
+Animation winningAnimation2;
+sf::Texture tex2;
 
 PlayingState::PlayingState(sf::RenderWindow * window, bool drawGui, Level* level) : GameState(window) {
 	this->level = level;
@@ -17,6 +23,28 @@ PlayingState::PlayingState(sf::RenderWindow * window, bool drawGui, Level* level
 	if (!this->buffer.loadFromFile("assets/Sounds/win.wav"))
 		return;
 
+	if (!tex1.loadFromFile("assets/Animation/heartAnimation.png"))
+		return;
+
+	if (!tex2.loadFromFile("assets/Animation/heartAnimation.png"))
+		return;
+
+	winningAnimation1.setSpriteSheet(tex1);
+	winningAnimation2.setSpriteSheet(tex2);
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 4; j++) {
+			winningAnimation1.addFrame(sf::IntRect(64 * j, 64 * i, 64, 64));
+			winningAnimation2.addFrame(sf::IntRect(64 * j, 64 * i, 64, 64));
+		}
+	}
+
+	this->gameWonSprite1 = new AnimatedSprite(sf::seconds(0.05), true, false);
+	this->gameWonSprite1->setAnimation(winningAnimation1);
+	this->gameWonSprite1->setOrigin(sf::Vector2f(64, 92));
+	this->gameWonSprite2 = new AnimatedSprite(sf::seconds(0.05), true, false);
+	this->gameWonSprite2->setAnimation(winningAnimation2);
+	this->gameWonSprite2->setOrigin(sf::Vector2f(0, 92));
+	this->frameClock.restart();
 	this->sound.setBuffer(buffer);
 }
 
@@ -65,7 +93,7 @@ void PlayingState::processEvents() {
 		this->checkCollision();
 		bool oob = this->checkOutOfBounds(this->playerOne);
 		oob = oob || this->checkOutOfBounds(this->playerTwo);
-		if (oob) {
+		if (oob && !this->gameWon) {
 			this->runGame = false;
 			this->showLostGUI();
 		}
@@ -74,6 +102,9 @@ void PlayingState::processEvents() {
 }
 
 void PlayingState::checkCollision() {
+	if (this->gameWon)
+		return;
+
 	if (this->playerOne->collision() && this->playerTwo->collision()) {
 		sf::Texture* tex1 = new sf::Texture();
 		tex1->loadFromFile("assets/Object/Player1.jpg");
@@ -83,10 +114,21 @@ void PlayingState::checkCollision() {
 		tex2->loadFromFile("assets/Object/Player2.jpg");
 		this->playerTwo->setTexture(tex2);
 
-		this->runGame = false;
 		this->showWonGUI();
-
+		this->gameWon = true;
+		this->gameWonSprite1->play();
+		this->gameWonSprite2->play();
 		this->sound.play();
+	}
+
+	for (Entity* e : this->getGameWorld()->getEntities()) {
+		if (!e->isEntityLava())
+			continue;
+
+		if (e->collision() && this->playerOne->collision() || e->collision() && this->playerTwo->collision()) {
+			this->runGame = false;
+			this->showLostGUI();
+		}
 	}
 }
 
@@ -112,7 +154,6 @@ void PlayingState::clear(){
 }
 
 void PlayingState::draw(){
-
 	std::vector<NonDrawableSurface*> nds = this->gameWorld->getNonDrawableSurfaces();
 	for (unsigned int i = 0; i < nds.size(); i++)
 		this->window->draw(*nds[i]);
@@ -127,7 +168,16 @@ void PlayingState::draw(){
 				this->window->draw(*shapes[j]);
 		}
 	}
-	
+
+	if (this->gameWon) {
+		this->gameWonSprite1->update(frameClock.restart());
+		this->gameWonSprite1->setPosition(this->playerOne->getShape()->getPosition());
+		this->gameWonSprite2->update(frameClock.getElapsedTime());
+		this->gameWonSprite2->setPosition(this->playerTwo->getShape()->getPosition());
+		this->window->draw(*this->gameWonSprite1);
+		this->window->draw(*this->gameWonSprite2);
+	}
+
 	this->progressBar->setLength(this->splineLength);
 	this->window->draw(*this->progressBar->getBackground());
 	this->window->draw(*this->progressBar->getProgress());
